@@ -1,0 +1,21 @@
+{
+    "name": "kregel/tamber",
+    "description": "The PHP SDK for the Tamber API.",
+    "keywords": [
+        "tamber",
+        "recommendation",
+        "engine"
+    ],
+    "license": "MIT",
+    "type": "library",
+    "homepage": "https://tamber.com",
+    "require": {
+        "php": ">=5.6",
+        "guzzlehttp/guzzle": "^6.2"
+    },
+    "autoload": {
+        "psr-4": {
+            "Kregel\\Timber\\": "src/"
+        }
+    }
+}
