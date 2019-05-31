@@ -4,7 +4,12 @@
 namespace Kregel\Tamber;
 
 
-class Discover
+use Kregel\Tamber\Contracts\Hottestable;
+use Kregel\Tamber\Contracts\Popularable;
+use Kregel\Tamber\Contracts\Recommendable;
+use Kregel\Tamber\Contracts\Similarable;
+
+class Discover implements Recommendable, Similarable, Hottestable, Popularable
 {
     use InteractsWithApi, TransformRequest;
 

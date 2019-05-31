@@ -4,7 +4,11 @@
 namespace Kregel\Tamber;
 
 
-class Event
+use Kregel\Tamber\Contracts\Retrievable;
+use Kregel\Tamber\Contracts\Trackable;
+use Kregel\Tamber\Contracts\Batchable;
+
+class Event implements Trackable, Retrievable, Batchable
 {
     use InteractsWithApi, TransformRequest;
 

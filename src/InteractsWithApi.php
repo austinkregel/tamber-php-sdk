@@ -5,6 +5,8 @@ namespace Kregel\Tamber;
 
 
 use GuzzleHttp\Client;
+use GuzzleHttp\Exception\ClientException;
+use Kregel\Tamber\Exceptions\TamberException;
 
 trait InteractsWithApi
 {
@@ -13,7 +15,7 @@ trait InteractsWithApi
      *
      * @var Client
      */
-    private $_client;
+    protected $client;
 
     /**
      * Initialize the client.
@@ -22,8 +24,12 @@ trait InteractsWithApi
      */
     private function init()
     {
-        $this->_client = new Client([
+        $this->client = new Client([
             'base_uri' => Tamber::getBaseUrl(),
+            'auth' => [
+                Tamber::getProjectKey(),
+                Tamber::getEngineKey(),
+            ]
         ]);
     }
 
@@ -38,18 +44,24 @@ trait InteractsWithApi
      */
     public function sendRequest($method, $url, $params = [])
     {
-        if ($this->_client == null) {
+        if ($this->client == null) {
             $this->init();
         }
-        $res = $this->_client->request($method, $url, [
-            'headers' => [
-                'Authorization' => 'Basic ' . base64_encode(Tamber::getApiToken()),
-                'Accept' => 'application/json',
-                'Content-Type' => 'application/json',
-            ],
-            'json' => $params,
-        ]);
-        return $res->getBody();
+
+        try {
+            $res = $this->client->request($method, $url, [
+                'headers' => [
+                    'Accept' => 'application/json',
+                    'Content-Type' => 'application/x-www-form-urlencoded',
+                ],
+                'form_params' => $params,
+            ]);
+            return $res->getBody();
+        } catch (ClientException $exception) {
+            $response = json_decode($exception->getResponse()->getBody()->getContents());
+
+            throw new TamberException($response->error, $params);
+        }
     }
 
 }

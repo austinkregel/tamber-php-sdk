@@ -3,7 +3,10 @@
 
 namespace Kregel\Tamber;
 
-class Behavior
+use Kregel\Tamber\Contracts\Creatable;
+use Kregel\Tamber\Contracts\Retrievable;
+
+class Behavior implements Creatable, Retrievable
 {
     use InteractsWithApi, TransformRequest;
 
@@ -21,11 +24,11 @@ class Behavior
     /**
      * Retrieve the given behavior
      *
-     * @param string $behavior_name
+     * @param array $params
      * @return \Psr\Http\Message\StreamInterface
      */
-    public function retrieve(string $behavior_name)
+    public function retrieve(array $params)
     {
-        return $this->sendRequest('post', 'behavior/retrieve', ['name' => $behavior_name]);
+        return $this->sendRequest('post', 'behavior/retrieve', $params);
     }
 }

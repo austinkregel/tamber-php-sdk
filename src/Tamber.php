@@ -1,19 +1,17 @@
 <?php
 
-
 namespace Kregel\Tamber;
-
 
 class Tamber
 {
     /**
-     * This is the API Token which you can retriever from the Tamber dashboard.
+     * This is the Project Key which you can retriever from the Tamber dashboard.
      *
      * @url https://dashboard.tamber.com/
      *
      * @var
      */
-    public static $apiToken;
+    public static $projectKey;
 
     /**
      * This is the base API URL.
@@ -23,23 +21,49 @@ class Tamber
     public static $apiBase = 'https://api.tamber.com/v1/';
 
     /**
-     * Return the api key.
+     *
+     * @var string|null
+     */
+    public static $engineKey;
+
+    /**
+     * Return the project key.
      *
      * @return string
      */
-    public static function getApiToken()
+    public static function getProjectKey()
     {
-        return self::$apiToken;
+        return self::$projectKey;
     }
 
     /**
-     * Set the api key.
+     * Set the project key.
      *
-     * @param $apiToken
+     * @param $projectKey
      */
-    public static function setApiToken($apiToken)
+    public static function setProjectKey($projectKey)
     {
-        self::$apiToken = $apiToken;
+        self::$projectKey = $projectKey;
+    }
+
+    /**
+     * Return the engine key.
+     *
+     * @return string
+     */
+    public static function getEngineKey()
+    {
+        return self::$engineKey;
+    }
+
+    /**
+     * Set the engine key.
+     *
+     * @param $projectKey
+     */
+    public static function setEngineKey($engineKey)
+    {
+        self::$engineKey = $engineKey;
     }
 
     /**

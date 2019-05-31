@@ -3,8 +3,12 @@
 
 namespace Kregel\Tamber;
 
+use Kregel\Tamber\Contracts\Creatable;
+use Kregel\Tamber\Contracts\Removable;
+use Kregel\Tamber\Contracts\Retrievable;
+use Kregel\Tamber\Contracts\Updatable;
 
-class Item
+class Item implements Creatable, Updatable, Retrievable, Removable
 {
     use InteractsWithApi, TransformRequest;
 
