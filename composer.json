@@ -11,11 +11,12 @@
     "homepage": "https://tamber.com",
     "require": {
         "php": ">=5.6",
-        "guzzlehttp/guzzle": "^6.2"
+        "guzzlehttp/guzzle": "^6.2",
+        "ext-json": "^1.6"
     },
     "autoload": {
         "psr-4": {
-            "Kregel\\Timber\\": "src/"
+            "Kregel\\Tamber\\": "src/"
         }
     }
 }
